@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "charliermarsh.ruff",
+    "donjayamanne.python-environment-manager",
+    "ms-python.vscode-pylance",
+    "ms-python.python"
+  ]
+}
