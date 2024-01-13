@@ -22,7 +22,7 @@ python src/app.py
 Build the application for production:
 
 ```powershell
-python -m PyInstaller --clean --onefile --console --name auto-win src/app.py
+python -m PyInstaller --clean --onefile --console --uac-admin --name auto-win src/app.py
 ```
 
 Run the application:

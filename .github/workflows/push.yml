@@ -45,7 +45,7 @@ jobs:
 
       - name: Build with PyInstaller
         run: |
-          pyinstaller --onefile --console --name auto-win src/app.py
+          pyinstaller --onefile --console --uac-admin --name auto-win src/app.py
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3

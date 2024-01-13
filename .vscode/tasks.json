@@ -6,7 +6,7 @@
     {
       "label": "Build with PyInstaller",
       "type": "shell",
-      "command": "${command:python.interpreterPath} -m PyInstaller --clean --onefile --console --name auto-win src/app.py",
+      "command": "${command:python.interpreterPath} -m PyInstaller --clean --onefile --console --uac-admin --name auto-win src/app.py",
       "group": {
         "kind": "build",
         "isDefault": true
