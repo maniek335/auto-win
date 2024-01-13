@@ -16,3 +16,17 @@ Start the development application:
 ```powershell
 python src/app.py
 ```
+
+## Production
+
+Build the application for production:
+
+```powershell
+python -m PyInstaller --clean --onefile --console --name auto-win src/app.py
+```
+
+Run the application:
+
+```powershell
+dist/auto-win.exe
+```
