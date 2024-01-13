@@ -11,6 +11,32 @@
       "program": "${workspaceFolder}/src/app.py",
       "console": "integratedTerminal",
       "justMyCode": true
+    },
+    {
+      "name": "Python: Launch app (debugger)",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/src/app.py",
+      "args": ["--debugger"],
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Python: Attach to app",
+      "type": "python",
+      "request": "attach",
+      "port": 5678,
+      "justMyCode": true,
+      "preLaunchTask": "Wait for debugger"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Python: Launch app (debugger) then attach",
+      "configurations": [
+        "Python: Launch app (debugger)",
+        "Python: Attach to app"
+      ]
     }
   ]
 }

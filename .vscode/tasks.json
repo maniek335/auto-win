@@ -11,6 +11,11 @@
         "kind": "build",
         "isDefault": true
       }
+    },
+    {
+      "label": "Wait for debugger",
+      "type": "shell",
+      "command": "do {} until (Test-NetConnection 127.0.0.1 -Port 5678 | Where-Object { $_.TcpTestSucceeded })"
     }
   ]
 }
