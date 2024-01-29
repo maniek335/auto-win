@@ -1,14 +1,19 @@
 import argparse
+import logging
 import sys
+import warnings
 
 import debugpy
 import pyuac
+from modules.seven_zip import SevenZip
+from pywinauto.timings import Timings
 
 
 def main(**kwargs):
     """
     Args:
         debugger (bool, optional): Not available in a PyInstaller bundle. Start debugger on port 5678 and wait for attach. Defaults to False.
+        7zip_path (str, optional): Path to 7-Zip installer. Defaults to None.
     """
 
     # Debugging
@@ -18,8 +23,27 @@ def main(**kwargs):
         print("Waiting for debugger attach")
         debugpy.wait_for_client()
 
+    # Logging
+    logging.basicConfig(
+        level=logging.DEBUG,
+        format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
+    )
+    warnings.filterwarnings(
+        "ignore", category=UserWarning
+    )  # pywinauto 32bit on 64bit Windows
+
+    # Pywinauto timings
+    Timings.fast()
+
+    # Modules
+    seven_zip = SevenZip()
+
     # Code
-    print("Hello World!")
+    try:
+        seven_zip.uninstall()
+        seven_zip.install(kwargs.get("7zip_path", ""))
+    except Exception as e:
+        logging.exception(e)
 
     input("Press Enter to continue...")
 
@@ -37,6 +61,8 @@ if __name__ == "__main__":
             help="Start debugger on port 5678 and wait for attach",
             action="store_true",
         )
+
+    parser.add_argument("--7zip-path", help="Path to 7-Zip installer", default="")
 
     args = parser.parse_args()
 
