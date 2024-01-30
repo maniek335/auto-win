@@ -2,6 +2,7 @@ import argparse
 import logging
 import sys
 import warnings
+from tkinter import filedialog as fd
 
 import debugpy
 import pyuac
@@ -40,8 +41,15 @@ def main(**kwargs):
 
     # Code
     try:
+        seven_zip_installer_path = kwargs.get("7zip_path", None)
+
+        if seven_zip_installer_path is None:
+            seven_zip_installer_path = fd.askopenfilename(
+                title="Select 7-Zip installer", filetypes=[("7-Zip", "*.exe")]
+            )
+
         seven_zip.uninstall()
-        seven_zip.install(kwargs.get("7zip_path", ""))
+        seven_zip.install(seven_zip_installer_path)
     except Exception as e:
         logging.exception(e)
 
@@ -62,7 +70,7 @@ if __name__ == "__main__":
             action="store_true",
         )
 
-    parser.add_argument("--7zip-path", help="Path to 7-Zip installer", default="")
+    parser.add_argument("--7zip-path", help="Path to 7-Zip installer")
 
     args = parser.parse_args()
 
